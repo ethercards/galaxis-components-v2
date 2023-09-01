@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { forwardRef } from 'react';
 // import FullscreenModal from '../../Components/FullscreenModal'
 import flip_icon from '../assets/images/flip-icon.svg';
+import close_icon from '../assets/images/close_png.png';
 
-const CardBack = ({ backImage, onClick, type }) => {
+const CardBack = ({ backImage, onClick, type, highLighted }) => {
   const [showFlipIcon, setshowFlipIcon] = useState(false);
   const [mobileView, setmobileView] = useState(false);
   const [backIsVideo, setbackIsVideo] = useState(false);
@@ -28,7 +29,7 @@ const CardBack = ({ backImage, onClick, type }) => {
           setshowFlipIcon(true);
         }}
         onMouseLeave={() => {
-          setshowFlipIcon(false);
+          setshowFlipIcon(!highLighted?false:true);
         }}
       >
         {!backIsVideo ? (
@@ -46,17 +47,39 @@ const CardBack = ({ backImage, onClick, type }) => {
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}
-        <div className="card-icons-holder">
-          <img
-            src={flip_icon}
-            className="flip-icon"
-            alt="not found"
-            style={{ display: showFlipIcon || mobileView ? 'block' : 'none' }}
-            onClick={(e) => {
-              onClick(e);
-            }}
-          />
-        </div>
+        {!highLighted?
+          <div className="card-icons-holder">
+            <img
+              src={flip_icon}
+              className="flip-icon"
+              alt="not found"
+              style={{ display: showFlipIcon || mobileView ? 'block' : 'none' }}
+              onClick={(e) => {
+                onClick(e);
+              }}
+            />
+          </div>
+        :
+            <div className="trait-container">
+              <div  className='trait-holder' 
+                    style={{clipPath: "url(#svgPath)" }}
+                    onClick={(e) => {
+                      onClick(e);
+                    }}
+              >
+                <img
+                  src={close_icon}
+                  className="flip-icon"
+                  alt="BACK"
+                  style={{ display: showFlipIcon || mobileView ? 'block' : 'none' }}
+                  onClick={(e) => {
+                    onClick(e);
+                  }}
+                />
+              </div>
+            </div>  
+        
+        }
       </div>
       {/* <FullscreenModal setOpen={setOpen} isOpen={open} imgSrc={fullscreenSrc} /> */}
     </>

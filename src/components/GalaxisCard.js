@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SpinnerCircular } from 'spinners-react';
 import flip_icon from '../assets/images/flip-icon.svg';
+import test from '../assets/images/trait-clip.svg';
 import CardBack from './CardBack.jsx';
 import TraitCard from './TraitCard.jsx';
 import './GalaxisCard.css';
 import useContainerDimensions from './useContainerDimensions';
+
 
 const GalaxisCard = ({
   metadata,
@@ -41,6 +43,7 @@ const GalaxisCard = ({
     height: 0,
   });
   const [containerSize, setContainerSize] = useState('medium');
+  const [highlightedSides, setHighlightedSides] = useState([]);
 
   useEffect(() => {
     if (window.innerWidth < 900) {
@@ -53,6 +56,31 @@ const GalaxisCard = ({
       setSelectedTrait(metadata.traits[0]);
     }
   }, []);
+
+//TAS
+  useEffect(()=>{
+    //check for highlighted sides
+    let highlighted = [];
+    if(metadata.sides && metadata.sides.length>0){
+
+      
+      console.log('check for highlighed sides',metadata.sides);
+      //display_mode "highlight"
+
+      metadata.sides.forEach((item)=>{
+        
+        if(item.display_mode && item.display_mode==="highlight"){
+          highlighted.push(item);
+        }
+      })
+      console.log('+++++',highlighted);
+      setHighlightedSides(highlighted);
+
+    }
+
+
+  },[metadata])
+
 
   const showTraits = (e) => {
     e.stopPropagation();
@@ -224,12 +252,19 @@ const GalaxisCard = ({
                       Sorry, your browser doesn't support embedded videos.
                     </video>
                   )}
+                  
+                 
+                    <a  className='branding-container' href={metadata.brand_url} target="_blank" rel="noreferrer">
+                      <img src={metadata.brand_logo} alt="brand"/>
+                    </a>
+
+
                   <div className='card-icons-holder'>
                     {/* <img src={fullScreen} alt="" className='fullscreen-icon'
                       style={{ display: showFlipIcon || mobileView ? 'block' : 'none' }}
                       onClick={() => { setFullscreenSource(randomImage) }}
                   /> */}
-                    {metadata.sides && metadata.sides.length > 1 && (
+                    {metadata.sides && metadata.sides.length > 1 && highlightedSides.length===0  && (
                       <img
                         src={flip_icon}
                         className='flip-icon'
@@ -245,58 +280,90 @@ const GalaxisCard = ({
                       />
                     )}
                   </div>
-                  {metadata.traits && metadata.traits.length > 0 && traitTypes && (
+                  {((metadata.traits && metadata.traits.length > 0 && traitTypes) ||highlightedSides.length>0) && (
                     <div
                       className={`trait-container ${traitsVisible ? 'hide' : ''
                         }`}
                     >
-                      {metadata.traits.map((elem, metadataIndex) => (
-                        elem.icon_url ?
-                          <>
-                            {parseInt(elem.status)===1&&<div
+                      <>
+                        {<>
+                        {highlightedSides&&highlightedSides.map((hlItem,idx)=>(
+                          <div
                               className='trait-holder'
-                              key={metadataIndex}
+                              style={{clipPath: "url(#svgPath)" }}
+                              key={idx}
                               onClick={(e) => {
-                                setSelectedTrait(
-                                  metadata.traits[metadataIndex]
-                                );
-                                // setTraitType(traitTypes[index]);
                                 showTraits(e);
+                                setshowBackCard(true);
                               }}
                             >
                               {' '}
-                              <img
-                                src={elem.icon_url}
-                                alt='undefined'
-                              />{' '}
-                            </div>}
-                          </>
+                                <img
+                                  src={hlItem.thumbnail}
+                                  alt='undefined'
+                                />{' '}
+                            </div>
+                        ))}
+                        </>}
+                        {metadata.traits&&<>
+                        {metadata.traits.map((elem, metadataIndex) => (
+                          elem.icon_url ?
+                            <>
+                              {parseInt(elem.status)===1&&
+                              <div
+                                className='trait-holder'
+                                style={{clipPath: "url(#svgPath)" }}
+                                key={metadataIndex}
+                                onClick={(e) => {
+                                  setSelectedTrait(
+                                    metadata.traits[metadataIndex]
+                                  );
+                                  // setTraitType(traitTypes[index]);
+                                  showTraits(e);
+                                }}
+                              >
+                                {' '}
+                                <img
+                                  src={elem.icon_url}
+                                  alt='undefined'
+                                />{' '}
+                              </div>}
+                            </>
 
-                          :
-                          traitTypes.map((traitElem, index) => {
-                            if (parseInt(elem.type) === traitElem.id){
-                              return (
-                                <div
-                                  className='trait-holder'
-                                  key={index}
-                                  onClick={(e) => {
-                                    setSelectedTrait(
-                                      metadata.traits[metadataIndex]
-                                    );
-                                    setTraitType(traitTypes[index]);
-                                    showTraits(e);
-                                  }}
-                                >
-                                  {' '}
-                                  <img
-                                    src={GALAXIS_BASE_URL + traitElem.icon_white}
-                                    alt='undefined'
-                                  />{' '}
-                                </div>
-                              );
-                            }
-                          })
-                      ))}
+                            :
+                            traitTypes.map((traitElem, index) => {
+                              if (parseInt(elem.type) === traitElem.id){
+                                return (
+                                  <div
+                                    className='trait-holder'
+                                    key={index}
+                                    onClick={(e) => {
+                                      setSelectedTrait(
+                                        metadata.traits[metadataIndex]
+                                      );
+                                      setTraitType(traitTypes[index]);
+                                      showTraits(e);
+                                    }}
+                                  >
+                                    {' '}
+                                    <img
+                                      src={GALAXIS_BASE_URL + traitElem.icon_white}
+                                      alt='undefined'
+                                    />{' '}
+                                  </div>
+                                );
+                              }
+                            })
+                        ))}
+                        </>}  
+                      </>
+                      <svg height="0" width="0">
+                        <defs>
+                          <clipPath id="svgPath"  clipPathUnits="objectBoundingBox">
+                            <path transform="scale(0.00365, 0.00334)" d="m0 100.559c0-18.397 9.829-35.389 25.786-44.551l85.64-49.181c15.85-9.103 35.33-9.103 51.179 0l85.629 49.181c15.957 9.162 25.785 26.154 25.785 44.551v97.896c0 18.397-9.828 35.389-25.785 44.552l-85.629 49.18c-15.849 9.103-35.329 9.103-51.179 0l-85.64-49.156c-15.957-9.175-25.786-26.179-25.786-44.576v-97.896z"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
                     </div>
                   )}
                 </span>
@@ -327,6 +394,8 @@ const GalaxisCard = ({
                       onClick={hideTraits}
                       backImage={metadata.sides[1].image}
                       type={metadata.sides[1].type === 'video' && metadata.sides[1].type}
+                      highLighted={highlightedSides.length>0}
+
                     />
                   </span>
                 )}

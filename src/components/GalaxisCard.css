@@ -180,18 +180,20 @@
 }
 
 .trait-holder{
+
   width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border:solid 2px white;
-  background-color: black;
+  height: 44px;
+
+  background-color: rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   overflow:hidden;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+  /* box-shadow: 2px 2px 4px rgba(0,0,0,0.35); */
+
 }
+
 .trait-holder:hover {
   border-color: #fc6405;
   
@@ -199,8 +201,11 @@
 .trait-holder img{
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  cursor: pointer;
   pointer-events:none;
 }
+
 .trait-card-root{
   width: 100%;
   height: 100%;
@@ -349,6 +354,20 @@
   cursor: pointer;
 }
 
+.branding-container{    
+  position: absolute;
+  bottom: 25px;
+  width: 100%;
+  height: 32px;
+  text-align: center;
+  display: block;
+}
+
+.branding-container  img{
+
+  height: 100%;
+}
+
 @media screen and (max-width: 450px) {
   /* .card-image-container {
       min-height: 300px;
@@ -397,10 +416,17 @@
   line-height: 22px;
 }
 
+.c-large .branding-container{
+    bottom: 25px;
+    height: 32px;
+}
+
+
+
 
 .c-medium .trait-holder{
   width: 35px;
-  height: 35px;
+  height: 38px;
 }
 .c-medium .trait-card-trait-icon-holder{
  /*  width: 100%; */
@@ -424,10 +450,15 @@
   line-height:30px
 }
 
+.c-medium .branding-container{
+  bottom: 20px;
+  height: 25px;
+}
+
 
 .c-small .trait-holder{
   width: 30px;
-  height: 30px;
+  height: 33px;
 }
 .c-small .trait-card-content-holder{
   padding: 20px 10px 20px 10px;
@@ -463,6 +494,11 @@
 
 .c-small.square .trait-card-description-holder{
   margin-top: 10px;
+}
+
+.c-small .branding-container{
+  bottom: 15px;
+  height: 20px;
 }
 
 
