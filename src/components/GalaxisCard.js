@@ -42,7 +42,7 @@ const GalaxisCard = ({
     width: 0,
     height: 0,
   });
-  const [containerSize, setContainerSize] = useState('medium');
+  const [containerSize, setContainerSize] = useState('c-medium');
   const [highlightedSides, setHighlightedSides] = useState([]);
 
   useEffect(() => {
@@ -114,7 +114,7 @@ const GalaxisCard = ({
   }, [imageRatio, width, height]);
 
   useEffect(() => {
-    //console.log(imageRatio,width,height)
+    console.log(imageRatio,width,height)
     if (width) {
       let cSize = '';
       if (width > 500) {
@@ -142,8 +142,8 @@ const GalaxisCard = ({
     if (metadata.sides && metadata.sides.length >= 1 && metadata.sides[0].original_height && metadata.sides[0].original_width) {
       let originalHeight = metadata.sides[0].original_height;
       let originalWidth = metadata.sides[0].original_width
-      //console.log(width, height);
-     // console.log(originalHeight, originalWidth)
+      console.log('TAS',width, height);
+      console.log(originalHeight, originalWidth)
       if (imageRatio != 0) {
         //console.log(imageRatio)
         setResizerComponentSize({
@@ -254,7 +254,9 @@ const GalaxisCard = ({
                   )}
                   
                  
-                    <a  className='branding-container' href={metadata.brand_url} target="_blank" rel="noreferrer">
+                    <a  className='branding-container' 
+                        href={metadata.brand_url} 
+                        target="_blank" rel="noreferrer">
                       <img src={metadata.brand_logo} alt="brand"/>
                     </a>
 

@@ -164,28 +164,17 @@ var img$8 = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width=
 
 var img$7 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADJCAMAAAC9r+gfAAAAUVBMVEVHcEz////8+fn8+vv8+fv7+/v8+vr9+fv9+vv8+fr8+fn7+Pn8+fr7+fn9+fv/9/f/9/f8+fn8+vr////8+fr8+fr9+vv9+fv8+vv9+fr7+/vROQ34AAAAG3RSTlMAAWXTwEpmkf/+Yv7//4whIGP/E/j3no3Sv0nFSNoIAAABiklEQVR4AezKSQEAIAwAoJ39K9vAAoM3cRkAAAAAAAAAAAAAAJDVs/+y048dO1QLGIahKMwMS7t0sA32/o9KK2KPvVdQ2yN+EZEvn5uVeY+I1inpbSb7ZmU+MpPUvc3gUKjBPMZYajLPRKIGc6nBrFGDGdRl1qjBDOoya9RgBnWZBWo2g7rMGjWYQV1mkRrMoC6zXg3mUoNZpQZzqcEsVZ/LDGowL/WpMH+1CUL1NEPSvgXoK+6BajSPOy4B+vnJRHXj/99HgP7orIpA85offzWb/dVs1qvBbKwGs7EazMZqMBurwWysBrOxGszGajAbq8FsrAazsRrMxmo2a96bgep8/cy9mW7QbE5jNUy0p5rNnmo2e6rZ7Klms6eazZ5qNnuq2eypZrOnms3eajb7q9msV4uvpv/36b927ZgIYBgGgqBtEpHEH2gYpMnMN96lcZcpAZrL/7r16Ii5YquNBy4Ev0fmrPEwpW4xX17+gPSa5q/evH2qZ32arrPXxQAAAAAAAAAAAAAAgBfYXIouSKEH2gAAAABJRU5ErkJggg==";
 
-var CardBack = function CardBack(_ref) {
-  var backImage = _ref.backImage,
-      _onClick = _ref.onClick,
-      type = _ref.type,
-      highLighted = _ref.highLighted;
-
-  var _useState = useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      showFlipIcon = _useState2[0],
-      setshowFlipIcon = _useState2[1];
-
-  var _useState3 = useState(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      mobileView = _useState4[0],
-      setmobileView = _useState4[1];
-
-  var _useState5 = useState(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      backIsVideo = _useState6[0],
-      setbackIsVideo = _useState6[1];
-
-  useEffect(function () {
+const CardBack = _ref => {
+  let {
+    backImage,
+    onClick,
+    type,
+    highLighted
+  } = _ref;
+  const [showFlipIcon, setshowFlipIcon] = useState(false);
+  const [mobileView, setmobileView] = useState(false);
+  const [backIsVideo, setbackIsVideo] = useState(false);
+  useEffect(() => {
     if (window.innerWidth < 900) {
       setmobileView(true);
     }
@@ -197,12 +186,12 @@ var CardBack = function CardBack(_ref) {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "card-back-root",
     style: {
-      backgroundImage: !backIsVideo ? "url(".concat(backImage, ")") : 'unset'
+      backgroundImage: !backIsVideo ? `url(${backImage})` : 'unset'
     },
-    onMouseOver: function onMouseOver() {
+    onMouseOver: () => {
       setshowFlipIcon(true);
     },
-    onMouseLeave: function onMouseLeave() {
+    onMouseLeave: () => {
       setshowFlipIcon(!highLighted ? false : true);
     }
   }, !backIsVideo ? /*#__PURE__*/React.createElement("img", {
@@ -228,8 +217,8 @@ var CardBack = function CardBack(_ref) {
     style: {
       display: showFlipIcon || mobileView ? 'block' : 'none'
     },
-    onClick: function onClick(e) {
-      _onClick(e);
+    onClick: e => {
+      onClick(e);
     }
   })) : /*#__PURE__*/React.createElement("div", {
     className: "trait-container"
@@ -238,8 +227,8 @@ var CardBack = function CardBack(_ref) {
     style: {
       clipPath: "url(#svgPath)"
     },
-    onClick: function onClick(e) {
-      _onClick(e);
+    onClick: e => {
+      onClick(e);
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: img$7,
@@ -248,8 +237,8 @@ var CardBack = function CardBack(_ref) {
     style: {
       display: showFlipIcon || mobileView ? 'block' : 'none'
     },
-    onClick: function onClick(e) {
-      _onClick(e);
+    onClick: e => {
+      onClick(e);
     }
   })))));
 };
@@ -326,7 +315,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z$9 = ".card-image-container{\n  position: relative;\n  /* min-height: 500px; */\n  margin: auto;\n  height: 100%;\n  width: 100%;\n}\n.pyramid_anim_container {\n  z-index: 2;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  transform: translate3d(0, 0, 0);\n}\n.resizer-container{\n  padding: 10px;\n}\n\n.scope span {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  transform-origin: center;\n  transform-style: preserve-3d;\n}\n.scope span:first-child {\n  transform: rotateY(calc(0deg)) translateZ(1px) rotateX(0deg);\n}\n.scope span:nth-child(2) {\n  transform: rotateY(calc(0deg)) translateZ(0px) rotateX(0deg);\n}\n\n.scope {\n  position: relative;\n  transform-style: preserve-3d;\n  animation: slid 5s linear infinite;\n  border-radius: 12px;\n  transition: 1.5s all;\n  padding: 10px;\n  /* box-shadow: 0px 55px 88px 0px rgba(0,0,0,0.42); */\n}\n.scope span {\n  overflow: hidden;\n  border-radius: 12px;\n}\n.front.active::after{\n  content: \"\";\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 100%;\n  display: block;\n  background: linear-gradient(112deg,hsla(0,0%,100%,0) 35%,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 65%);\n  background-position-x: 0;\n  background-repeat: no-repeat;\n  transition: all .35s ease-in-out;\n  pointer-events: none;\n  z-index: 2;\n  animation: shiningEffect1 2s ease-in-out normal ;\n}\n.back.active::after{\n  content: \"\";\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  right: 100%;\n  display: block;\n  background: linear-gradient(250deg,hsla(0,0%,100%,0) 35%,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 65%);\n  background-position-x: 0;\n  background-repeat: no-repeat;\n  transition: all .35s ease-in-out;\n  pointer-events: none;\n  z-index: 2;\n  animation: shiningEffect2 2s ease-in-out normal ;\n}\n.back_card.active::after{\n  content: \"\";\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  right: 100%;\n  display: block;\n  background: linear-gradient(250deg,hsla(0,0%,100%,0) 35%,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 65%);\n  background-position-x: 0;\n  background-repeat: no-repeat;\n  transition: all .35s ease-in-out;\n  pointer-events: none;\n  z-index: 2;\n  animation: shiningEffect2 2s ease-in-out normal ;\n}\n.badge-img{\n  position: absolute;\n  width: 75px;\n  height: 75px;\n  bottom: 15px;\n  margin-left: auto;\n  margin-right: auto;\n  left: 0;\n  right: 0;\n  cursor: pointer;\n}\n.flip-icon {\n  /* position: absolute; */\n  width: 40px;\n  height: 40px;\n  /* margin-top: auto;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: auto;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;*/\n  cursor: pointer; \n}\n.fullscreen-icon{\n  /* position: absolute; */\n  width: 40px;\n  height: 40px;\n  margin-right: 10px;\n  /* margin-top: auto;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: auto;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0; */\n  cursor: pointer;\n}\n.back_card{\n  animation: hideBack 2s ease-in-out normal;\n  transition: all 1s;\n  visibility: hidden;\n  border-radius: 12px;\n}\n.back_card.active{\n  visibility: visible;\n}\n.card-back-root {\n  height: 100%;\n  transform: rotateY(180deg);\n  border-radius: 12px;\n  background-position: center center;\n  background-size: cover;\n  background-repeat: no-repeat;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-pack: end;\n  justify-content: flex-end;\n  position: relative;\n}\n.card-icons-holder{\n  position: absolute;\n  inset: 0px;\n  margin: auto;\n  width: 100%;\n  max-height: 40px;\n  display: flex;\n  -webkit-box-pack: center;\n  justify-content: center;\n}\n.trait-container {\n  position: absolute;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  gap: 8px;\n  top: 10px;\n  right: 10px;\n}\n\n.trait-holder{\n\n  width: 40px;\n  height: 44px;\n\n  background-color: rgba(0,0,0,0.2);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  overflow:hidden;\n  /* box-shadow: 2px 2px 4px rgba(0,0,0,0.35); */\n\n}\n\n.trait-holder:hover {\n  border-color: #fc6405;\n  \n}\n.trait-holder img{\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  cursor: pointer;\n  pointer-events:none;\n}\n\n.trait-card-root{\n  width: 100%;\n  height: 100%;\n  border-radius: 12px;\n  transform: rotateY(180deg);\n  -webkit-background-position: center;\n  background-position: center;\n  -webkit-background-size: cover;\n  background-size: cover;\n  background-repeat: no-repeat;\n}\n.close-button {\n  width: 20.5px;\n  height: 20.5px;\n  cursor: pointer;\n  position: absolute;\n  top: 12px;\n  left: 12px;\n  z-index: 5;\n  transform: rotateX(0deg);\n}\n.trait-card-content {\n  width: 100%;\n  height: 100%;\n  border-radius: 12px;\n  background-color: #fc6405b3;\n}\n.trait-card-content-holder{\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 30px;\n \n}\n\n.trait-card-trait-icon-holder {\n  /* width: 100%; */\n  height: 40%;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n.trait-card-trait-icon-holder img{\n  width: 100%;\n  height: 100%;\n}\n.trait-card-title-holder{\n    display: flex;\n    justify-content: center;\n    width: 100%;\n}\n.trait-card-title {\n  margin: 0px;\n  font-weight: 400;\n  color: rgb(250, 250, 242);\n  font-size: 36px;\n  font-family: Poppins-semibold;\n  line-height: 42px;\n  text-align: center;\n  width: fit-content;\n  /* max-width: 250px; */\n  /* min-width: 250px; */\n}\n.trait-card-description-holder{\n  margin-top: 25px;\n  display: flex;\n  -webkit-box-pack: center;\n  justify-content: center;\n  overflow-y: auto;\n}\n .trait-card-description-holder::-webkit-scrollbar {\n  width: 4px;\n}\n.trait-card-description-holder::-webkit-scrollbar-track {\n  background: #ffffff49;\n} \n.trait-card-description-holder::-webkit-scrollbar-thumb  {\n  background: #ffffff;\n} \n.trait-card-description{\n  margin: 0px;\n  font-weight: 400;\n  color: rgb(250, 250, 242);\n  font-family: poppins;\n  font-size: 16px;\n  line-height: 22px;\n  text-align: center;\n  max-width: 90%;\n  min-width: 120px;\n  word-break: break-word\n}\n.trait-card-button-holder{\n  text-align: center;\n  margin-top: 30px;\n}\n\n@keyframes shiningEffect1 {\n  0%{\n\n    left: -100%;\n  }\n 100%{\n\n  left: 100%;\n }\n}\n@keyframes shiningEffect2 {\n  0%{\n\n    right: -100%;\n  }\n 100%{\n  right: 100%;\n }\n}\n\n@keyframes hideBack {\n from{\n  visibility: visible;\n  }\n to{\n    visibility: hidden;\n  }\n}\n.flipped-img {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-radius: 10px;\n  object-fit: cover;\n  transition: 2s;\n}\n.buttonHolder{\n  position: fixed;\n  height: 16px;\n  width: 16px;\n  top: 4%;\n  left: 4%;\n  font-weight: 600;\n  font-size: 1rem;\n  line-height: 1rem;\n  color: #fff;\n  transition: color .3s ease-in-out;\n  cursor: pointer;\n}\n\n.branding-container{    \n  position: absolute;\n  bottom: 25px;\n  width: 100%;\n  height: 32px;\n  text-align: center;\n  display: block;\n}\n\n.branding-container  img{\n\n  height: 100%;\n}\n\n@media screen and (max-width: 450px) {\n  /* .card-image-container {\n      min-height: 300px;\n  } */\n  .scope {\n    position: relative;\n    height: 440px;\n    transform-style: preserve-3d;\n    animation: slid 5s linear infinite;\n    transition: 2s all;\n  }\n  .arrow{\n    display: none;\n  }\n}\n@media screen and (max-width: 350px) {\n  .badge-img{\n    margin-left: auto;\n    margin-right: auto;\n    left: 0;\n    right: 0;\n  }\n  .scope {\n    position: relative;\n    /* width: 250px !important;\n    height: 340px; */\n    transform-style: preserve-3d;\n    animation: slid 5s linear infinite;\n    transition-property: position;\n    transition: 2s;\n  }\n}\n\n\n.c-large.square .trait-card-trait-icon-holder{\n  /* width: 100%; */\n  height: 35%;\n  margin-bottom: 10px;\n}\n\n.c-large.square .c-medium .trait-card-title{\n  font-size: 36px;\n}\n\n.c-large.square .trait-card-description{\n  line-height: 22px;\n}\n\n.c-large .branding-container{\n    bottom: 25px;\n    height: 32px;\n}\n\n\n\n\n.c-medium .trait-holder{\n  width: 35px;\n  height: 38px;\n}\n.c-medium .trait-card-trait-icon-holder{\n /*  width: 100%; */\n  height: 30%;\n  margin-bottom: 10px;\n}\n.c-medium .trait-card-title{\n  font-size: 32px;\n}\n.c-medium .trait-card-description{\n  line-height: 22px;\n}\n\n.c-medium.square .trait-card-trait-icon-holder{\n  margin-top: 5px;\n  margin-bottom: 5px;\n}\n\n.c-medium.square .trait-card-title{\n  font-size: 28px;\n  line-height:30px\n}\n\n.c-medium .branding-container{\n  bottom: 20px;\n  height: 25px;\n}\n\n\n.c-small .trait-holder{\n  width: 30px;\n  height: 33px;\n}\n.c-small .trait-card-content-holder{\n  padding: 20px 10px 20px 10px;\n}\n.c-small .trait-card-trait-icon-holder{\n  /* width: 100%; */\n  height: 25%;\n  margin-bottom:5px;\n}\n.c-small .trait-card-title{\n  font-size: 27px\n}\n\n.c-small .trait-card-description{\n  line-height: 16px;\n  line-height: 17px;\n}\n\n.c-small.square .trait-card-trait-icon-holder{\n  width: 52px;\n  height: 52px;\n  margin-top:0px;\n  margin-bottom:0px;\n}\n.c-small.square .trait-card-title{\n  font-size: 24px;\n  line-height: 25px;\n}\n\n.c-small.square .trait-card-content-holder{\n  padding: 15px 10px 15px 10px;\n}\n\n.c-small.square .trait-card-description-holder{\n  margin-top: 10px;\n}\n\n.c-small .branding-container{\n  bottom: 15px;\n  height: 20px;\n}\n\n\n.c-xsmall .trait-card-content-holder{\n  padding: 30px 5px 20px 5px;\n}\n\n/* .c-small .trait-card-trait-icon-holder, */\n .c-xsmall .trait-card-trait-icon-holder{\n  display: none;\n}\n.c-xsmall .trait-card-content-holder .trait-card-title{\n  font-size: 20px;\n  line-height: 22px;\n  padding-top: 15px;\n}\n\n.c-xsmall .trait-card-description{\n  line-height: 18px;\n}";
+var css_248z$9 = ".card-image-container{\n  position: relative;\n  /* min-height: 500px; */\n  margin: auto;\n  height: 100%;\n  width: 100%;\n}\n.pyramid_anim_container {\n  z-index: 2;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  transform: translate3d(0, 0, 0);\n}\n.resizer-container{\n  padding: 10px;\n}\n\n.scope span {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  transform-origin: center;\n  transform-style: preserve-3d;\n}\n.scope span:first-child {\n  transform: rotateY(calc(0deg)) translateZ(1px) rotateX(0deg);\n}\n.scope span:nth-child(2) {\n  transform: rotateY(calc(0deg)) translateZ(0px) rotateX(0deg);\n}\n\n.scope {\n  position: relative;\n  transform-style: preserve-3d;\n  animation: slid 5s linear infinite;\n  border-radius: 12px;\n  transition: 1.5s all;\n  padding: 10px;\n  /* box-shadow: 0px 55px 88px 0px rgba(0,0,0,0.42); */\n}\n.scope span {\n  overflow: hidden;\n  border-radius: 12px;\n}\n.front.active::after{\n  content: \"\";\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 100%;\n  display: block;\n  background: linear-gradient(112deg,hsla(0,0%,100%,0) 35%,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 65%);\n  background-position-x: 0;\n  background-repeat: no-repeat;\n  transition: all .35s ease-in-out;\n  pointer-events: none;\n  z-index: 2;\n  animation: shiningEffect1 2s ease-in-out normal ;\n}\n.back.active::after{\n  content: \"\";\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  right: 100%;\n  display: block;\n  background: linear-gradient(250deg,hsla(0,0%,100%,0) 35%,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 65%);\n  background-position-x: 0;\n  background-repeat: no-repeat;\n  transition: all .35s ease-in-out;\n  pointer-events: none;\n  z-index: 2;\n  animation: shiningEffect2 2s ease-in-out normal ;\n}\n.back_card.active::after{\n  content: \"\";\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  right: 100%;\n  display: block;\n  background: linear-gradient(250deg,hsla(0,0%,100%,0) 35%,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 65%);\n  background-position-x: 0;\n  background-repeat: no-repeat;\n  transition: all .35s ease-in-out;\n  pointer-events: none;\n  z-index: 2;\n  animation: shiningEffect2 2s ease-in-out normal ;\n}\n.badge-img{\n  position: absolute;\n  width: 75px;\n  height: 75px;\n  bottom: 15px;\n  margin-left: auto;\n  margin-right: auto;\n  left: 0;\n  right: 0;\n  cursor: pointer;\n}\n.flip-icon {\n  /* position: absolute; */\n  width: 40px;\n  height: 40px;\n  /* margin-top: auto;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: auto;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;*/\n  cursor: pointer; \n}\n.fullscreen-icon{\n  /* position: absolute; */\n  width: 40px;\n  height: 40px;\n  margin-right: 10px;\n  /* margin-top: auto;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: auto;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0; */\n  cursor: pointer;\n}\n.back_card{\n  animation: hideBack 2s ease-in-out normal;\n  transition: all 1s;\n  visibility: hidden;\n  border-radius: 12px;\n}\n.back_card.active{\n  visibility: visible;\n}\n.card-back-root {\n  height: 100%;\n  transform: rotateY(180deg);\n  border-radius: 12px;\n  background-position: center center;\n  background-size: cover;\n  background-repeat: no-repeat;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-pack: end;\n  justify-content: flex-end;\n  position: relative;\n}\n.card-icons-holder{\n  position: absolute;\n  inset: 0px;\n  margin: auto;\n  width: 100%;\n  max-height: 40px;\n  display: flex;\n  -webkit-box-pack: center;\n  justify-content: center;\n}\n.trait-container {\n  position: absolute;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  gap: 8px;\n  top: 30px;\n  right: 30px;\n}\n\n.trait-holder{\n\n  width: 60px;\n  height: 66px;\n\n  background-color: rgba(0,0,0,0.2);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  overflow:hidden;\n  /* box-shadow: 2px 2px 4px rgba(0,0,0,0.35); */\n\n}\n\n.trait-holder:hover {\n  border-color: #fc6405;\n  \n}\n.trait-holder img{\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  cursor: pointer;\n  pointer-events:none;\n}\n\n.trait-card-root{\n  width: 100%;\n  height: 100%;\n  border-radius: 12px;\n  transform: rotateY(180deg);\n  -webkit-background-position: center;\n  background-position: center;\n  -webkit-background-size: cover;\n  background-size: cover;\n  background-repeat: no-repeat;\n}\n.close-button {\n  width: 20.5px;\n  height: 20.5px;\n  cursor: pointer;\n  position: absolute;\n  top: 12px;\n  left: 12px;\n  z-index: 5;\n  transform: rotateX(0deg);\n}\n.trait-card-content {\n  width: 100%;\n  height: 100%;\n  border-radius: 12px;\n  background-color: #fc6405b3;\n}\n.trait-card-content-holder{\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 30px;\n \n}\n\n.trait-card-trait-icon-holder {\n  /* width: 100%; */\n  height: 40%;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n.trait-card-trait-icon-holder img{\n  width: 100%;\n  height: 100%;\n}\n.trait-card-title-holder{\n    display: flex;\n    justify-content: center;\n    width: 100%;\n}\n.trait-card-title {\n  margin: 0px;\n  font-weight: 400;\n  color: rgb(250, 250, 242);\n  font-size: 36px;\n  font-family: Poppins-semibold;\n  line-height: 42px;\n  text-align: center;\n  width: fit-content;\n  /* max-width: 250px; */\n  /* min-width: 250px; */\n}\n.trait-card-description-holder{\n  margin-top: 25px;\n  display: flex;\n  -webkit-box-pack: center;\n  justify-content: center;\n  overflow-y: auto;\n}\n .trait-card-description-holder::-webkit-scrollbar {\n  width: 4px;\n}\n.trait-card-description-holder::-webkit-scrollbar-track {\n  background: #ffffff49;\n} \n.trait-card-description-holder::-webkit-scrollbar-thumb  {\n  background: #ffffff;\n} \n.trait-card-description{\n  margin: 0px;\n  font-weight: 400;\n  color: rgb(250, 250, 242);\n  font-family: poppins;\n  font-size: 16px;\n  line-height: 22px;\n  text-align: center;\n  max-width: 90%;\n  min-width: 120px;\n  word-break: break-word\n}\n.trait-card-button-holder{\n  text-align: center;\n  margin-top: 30px;\n}\n\n@keyframes shiningEffect1 {\n  0%{\n\n    left: -100%;\n  }\n 100%{\n\n  left: 100%;\n }\n}\n@keyframes shiningEffect2 {\n  0%{\n\n    right: -100%;\n  }\n 100%{\n  right: 100%;\n }\n}\n\n@keyframes hideBack {\n from{\n  visibility: visible;\n  }\n to{\n    visibility: hidden;\n  }\n}\n.flipped-img {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-radius: 10px;\n  object-fit: cover;\n  transition: 2s;\n}\n.buttonHolder{\n  position: fixed;\n  height: 16px;\n  width: 16px;\n  top: 4%;\n  left: 4%;\n  font-weight: 600;\n  font-size: 1rem;\n  line-height: 1rem;\n  color: #fff;\n  transition: color .3s ease-in-out;\n  cursor: pointer;\n}\n\n.branding-container{    \n  position: absolute;\n  bottom: 35px;\n  width: 100%;\n  height:20px;\n  text-align: center;\n  display: block;\n}\n\n.branding-container  img{\n\n  height: 100%;\n}\n\n@media screen and (max-width: 450px) {\n  /* .card-image-container {\n      min-height: 300px;\n  } */\n  .scope {\n    position: relative;\n    height: 440px;\n    transform-style: preserve-3d;\n    animation: slid 5s linear infinite;\n    transition: 2s all;\n  }\n  .arrow{\n    display: none;\n  }\n}\n@media screen and (max-width: 350px) {\n  .badge-img{\n    margin-left: auto;\n    margin-right: auto;\n    left: 0;\n    right: 0;\n  }\n  .scope {\n    position: relative;\n    /* width: 250px !important;\n    height: 340px; */\n    transform-style: preserve-3d;\n    animation: slid 5s linear infinite;\n    transition-property: position;\n    transition: 2s;\n  }\n}\n\n\n.c-large.square .trait-card-trait-icon-holder{\n  /* width: 100%; */\n  height: 35%;\n  margin-bottom: 10px;\n}\n\n.c-large.square .c-medium .trait-card-title{\n  font-size: 36px;\n}\n\n.c-large.square .trait-card-description{\n  line-height: 22px;\n}\n\n.c-large .branding-container{\n    bottom: 25px;\n    height: 18px;\n}\n\n\n\n\n.c-medium .trait-holder{\n  width: 40px;\n  height: 44px;\n}\n.c-medium .trait-card-trait-icon-holder{\n /*  width: 100%; */\n  height: 30%;\n  margin-bottom: 10px;\n}\n.c-medium .trait-card-title{\n  font-size: 32px;\n}\n.c-medium .trait-card-description{\n  line-height: 22px;\n}\n\n.c-medium.square .trait-card-trait-icon-holder{\n  margin-top: 5px;\n  margin-bottom: 5px;\n}\n\n.c-medium.square .trait-card-title{\n  font-size: 28px;\n  line-height:30px\n}\n\n.c-medium .branding-container{\n  bottom: 25px;\n  height: 15px;\n}\n\n\n.c-small .trait-holder{\n  width: 30px;\n  height: 33px;\n}\n.c-small .trait-card-content-holder{\n  padding: 20px 10px 20px 10px;\n}\n.c-small .trait-card-trait-icon-holder{\n  /* width: 100%; */\n  height: 25%;\n  margin-bottom:5px;\n}\n.c-small .trait-card-title{\n  font-size: 27px\n}\n\n.c-small .trait-card-description{\n  line-height: 16px;\n  line-height: 17px;\n}\n\n.c-small.square .trait-card-trait-icon-holder{\n  width: 52px;\n  height: 52px;\n  margin-top:0px;\n  margin-bottom:0px;\n}\n.c-small.square .trait-card-title{\n  font-size: 24px;\n  line-height: 25px;\n}\n\n.c-small.square .trait-card-content-holder{\n  padding: 15px 10px 15px 10px;\n}\n\n.c-small.square .trait-card-description-holder{\n  margin-top: 10px;\n}\n\n.c-small .branding-container{\n  bottom: 15px;\n  height: 12px;\n}\n\n\n.c-xsmall .trait-card-content-holder{\n  padding: 30px 5px 20px 5px;\n}\n\n/* .c-small .trait-card-trait-icon-holder, */\n .c-xsmall .trait-card-trait-icon-holder{\n  display: none;\n}\n.c-xsmall .trait-card-content-holder .trait-card-title{\n  font-size: 20px;\n  line-height: 22px;\n  padding-top: 15px;\n}\n\n.c-xsmall .trait-card-description{\n  line-height: 18px;\n}\n\n.c-xsmall .branding-container{\n  bottom: 12px;\n  height: 8px;\n}";
 styleInject(css_248z$9);
 
 const useContainerDimensions = myRef => {
@@ -445,7 +434,7 @@ var GalaxisCard = function GalaxisCard(_ref) {
       resizerComponentSize = _useState26[0],
       setResizerComponentSize = _useState26[1];
 
-  var _useState27 = useState('medium'),
+  var _useState27 = useState('c-medium'),
       _useState28 = _slicedToArray(_useState27, 2),
       containerSize = _useState28[0],
       setContainerSize = _useState28[1];
@@ -516,7 +505,8 @@ var GalaxisCard = function GalaxisCard(_ref) {
     }
   }, [imageRatio, width, height]);
   useEffect(function () {
-    //console.log(imageRatio,width,height)
+    console.log(imageRatio, width, height);
+
     if (width) {
       var cSize = '';
 
@@ -542,8 +532,9 @@ var GalaxisCard = function GalaxisCard(_ref) {
   useEffect(function () {
     if (metadata.sides && metadata.sides.length >= 1 && metadata.sides[0].original_height && metadata.sides[0].original_width) {
       var originalHeight = metadata.sides[0].original_height;
-      var originalWidth = metadata.sides[0].original_width; //console.log(width, height);
-      // console.log(originalHeight, originalWidth)
+      var originalWidth = metadata.sides[0].original_width;
+      console.log('TAS', width, height);
+      console.log(originalHeight, originalWidth);
 
       if (imageRatio != 0) {
         //console.log(imageRatio)
