@@ -60,7 +60,7 @@ const CardBack = ({ backImage, onClick, type, highLighted }) => {
             />
           </div>
         :
-            <div className="trait-container">
+            <div className="trait-container-v2">
               <div  className='trait-holder-v2' 
                     style={{clipPath: "url(#svgPath)" }}
                     onClick={(e) => {

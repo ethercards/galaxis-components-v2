@@ -114,14 +114,14 @@ const GalaxisCardV2 = ({
   }, [imageRatio, width, height]);
 
   useEffect(() => {
-    console.log(imageRatio,width,height)
+    console.log('rwh',imageRatio,width,height)
     if (width) {
       let cSize = '';
-      if (width > 500) {
+      if (width > 600) {
         cSize = 'c-xlarge';
-      } else if (width > 400) {
+      } else if (width > 500) {
         cSize = 'c-large';
-      } else if (width > 330) {
+      } else if (width > 390) {
         cSize = 'c-medium';
       } else if (width > 240) {
         cSize = 'c-small';
@@ -284,7 +284,7 @@ const GalaxisCardV2 = ({
                   </div>
                   {((metadata.traits && metadata.traits.length > 0 && traitTypes) ||highlightedSides.length>0) && (
                     <div
-                      className={`trait-container ${traitsVisible ? 'hide' : ''
+                      className={`trait-container-v2 ${traitsVisible ? 'hide' : ''
                         }`}
                     >
                       <>

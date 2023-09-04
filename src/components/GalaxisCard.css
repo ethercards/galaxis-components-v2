@@ -168,7 +168,7 @@
   -webkit-box-pack: center;
   justify-content: center;
 }
-.trait-container {
+.trait-container-v2 {
   position: absolute;
   display: flex;
   -webkit-flex-direction: column;
@@ -422,6 +422,12 @@
 }
 
 
+.c-medium .trait-container-v2 {
+  top:15px;
+  right:15px;
+
+
+}
 
 
 .c-medium .trait-holder-v2{
@@ -451,11 +457,16 @@
 }
 
 .c-medium .branding-container{
-  bottom: 25px;
+  bottom: 20px;
   height: 15px;
 }
 
+.c-small .trait-container-v2 {
+  top:15px;
+  right:15px;
 
+
+}
 .c-small .trait-holder-v2{
   width: 30px;
   height: 33px;
