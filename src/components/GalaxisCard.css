@@ -508,7 +508,7 @@
 }
 
 .c-small .branding-container{
-  bottom: 15px;
+  bottom: 20px;
   height: 12px;
 }
 
@@ -532,6 +532,6 @@
 }
 
 .c-xsmall .branding-container{
-  bottom: 12px;
+  bottom: 17px;
   height: 8px;
 }
