@@ -345,7 +345,7 @@ const useContainerDimensions = myRef => {
   return dimensions;
 };
 
-var GalaxisCard = function GalaxisCard(_ref) {
+var GalaxisCardV2 = function GalaxisCardV2(_ref) {
   var metadata = _ref.metadata,
       traitTypes = _ref.traitTypes,
       _ref$horizontalPaddin = _ref.horizontalPadding,
@@ -647,7 +647,7 @@ var GalaxisCard = function GalaxisCard(_ref) {
     className: "trait-container ".concat(traitsVisible ? 'hide' : '')
   }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, highlightedSides && highlightedSides.map(function (hlItem, idx) {
     return /*#__PURE__*/React.createElement("div", {
-      className: "trait-holder",
+      className: "trait-holder-v2",
       style: {
         clipPath: "url(#svgPath)"
       },
@@ -662,7 +662,7 @@ var GalaxisCard = function GalaxisCard(_ref) {
     }), ' ');
   })), metadata.traits && /*#__PURE__*/React.createElement(React.Fragment, null, metadata.traits.map(function (elem, metadataIndex) {
     return elem.icon_url ? /*#__PURE__*/React.createElement(React.Fragment, null, parseInt(elem.status) === 1 && /*#__PURE__*/React.createElement("div", {
-      className: "trait-holder",
+      className: "trait-holder-v2",
       style: {
         clipPath: "url(#svgPath)"
       },
@@ -678,7 +678,7 @@ var GalaxisCard = function GalaxisCard(_ref) {
     }), ' ')) : traitTypes.map(function (traitElem, index) {
       if (parseInt(elem.type) === traitElem.id) {
         return /*#__PURE__*/React.createElement("div", {
-          className: "trait-holder",
+          className: "trait-holder-v2",
           key: index,
           onClick: function onClick(e) {
             setSelectedTrait(metadata.traits[metadataIndex]);
@@ -5050,4 +5050,4 @@ var DustPools = function DustPools(_ref) {
   })))));
 };
 
-export { DustPools, GalaxisCard };
+export { DustPools, GalaxisCardV2 };
