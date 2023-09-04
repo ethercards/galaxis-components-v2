@@ -8,7 +8,7 @@ import './GalaxisCard.css';
 import useContainerDimensions from './useContainerDimensions';
 
 
-const GalaxisCard = ({
+const GalaxisCardV2 = ({
   metadata,
   traitTypes,
   horizontalPadding = 20,
@@ -291,7 +291,7 @@ const GalaxisCard = ({
                         {<>
                         {highlightedSides&&highlightedSides.map((hlItem,idx)=>(
                           <div
-                              className='trait-holder'
+                              className='trait-holder-v2'
                               style={{clipPath: "url(#svgPath)" }}
                               key={idx}
                               onClick={(e) => {
@@ -313,7 +313,7 @@ const GalaxisCard = ({
                             <>
                               {parseInt(elem.status)===1&&
                               <div
-                                className='trait-holder'
+                                className='trait-holder-v2'
                                 style={{clipPath: "url(#svgPath)" }}
                                 key={metadataIndex}
                                 onClick={(e) => {
@@ -337,7 +337,7 @@ const GalaxisCard = ({
                               if (parseInt(elem.type) === traitElem.id){
                                 return (
                                   <div
-                                    className='trait-holder'
+                                    className='trait-holder-v2'
                                     key={index}
                                     onClick={(e) => {
                                       setSelectedTrait(
@@ -409,4 +409,4 @@ const GalaxisCard = ({
     </>
   );
 };
-export default GalaxisCard;
+export default GalaxisCardV2;
