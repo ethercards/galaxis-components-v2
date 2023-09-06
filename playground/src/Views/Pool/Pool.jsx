@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { DustPools } from 'galaxis-components';
+import { DustPools } from 'galaxis-components-v2';
 import { useEffect } from 'react';
 import Header from '../../components/Header';
 import config from '../../config/config';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GalaxisCard } from 'galaxis-components';
+import { GalaxisCardV2 } from 'galaxis-components-v2';
 import { getFilteredCards } from "../../ApiTester";
 import config from "../../config/config";
 
@@ -97,7 +97,7 @@ const CardTest = ()=>{
 		<div style={{width:"100%", height:"100%", padding:'50px', overflow:"hidden"}}>	
 		{loaded && (
 		
-			<GalaxisCard
+			<GalaxisCardV2
 				name="Teszt"
 				metadata={metadata}
 				traitTypes={traitTypes}
