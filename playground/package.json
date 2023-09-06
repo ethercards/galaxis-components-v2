@@ -15,7 +15,7 @@
     "axios": "^0.26.1",
     "bnc-onboard": "^1.38.1",
     "ethers": "^5.5.1",
-    "galaxis-components": "link:../",
+    "galaxis-components-v2": "link:../",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-apexcharts": "^1.3.9",

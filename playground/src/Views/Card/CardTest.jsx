@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GalaxisCard } from 'galaxis-components';
+import { GalaxisCardV2 } from 'galaxis-components-v2';
 import { getFilteredCards } from "../../ApiTester";
 import config from "../../config/config";
 
@@ -8,6 +8,298 @@ const CardTest = ()=>{
 
 	//const [metadata, setMetadata] = useState();
   	const [loaded, setLoaded] = useState(true);
+
+	/* 
+	
+	{
+    "tokenId": 1,
+    "name": "Polygon 44 Tasi #1",
+    "collection_type": "galaxis",
+    "collection_name": "Polygon 44 Tasi",
+    "image": "https://ether-cards.mypinata.cloud/ipfs/QmZppnpRc9zoPKWCvm9RV4b33jvMegxq2cMtar7Vrz1hAS/images/1/2/2.jpg",
+    "animation_url": "https://explorer.galaxis.xyz/#/render?app.galaxis.xyz/44/1/metadata/2/2",
+    "sides": [
+        {
+            "id": 1,
+            "dna": "0105",
+            "image": "https://ether-cards.mypinata.cloud/ipfs/QmZppnpRc9zoPKWCvm9RV4b33jvMegxq2cMtar7Vrz1hAS/images/1/2/2.jpg"
+        },
+        {
+            "id": 2,
+            "dna": "01",
+            "image": "https://ether-cards.mypinata.cloud/ipfs/QmZppnpRc9zoPKWCvm9RV4b33jvMegxq2cMtar7Vrz1hAS/images/2/2/2.jpg"
+        }
+    ],
+    "attributes": [
+        {
+            "value": "background 3",
+            "trait_type": "Background"
+        },
+        {
+            "value": "icon 12",
+            "trait_type": "icn"
+        },
+        {
+            "value": "back_layer",
+            "trait_type": "back side"
+        },
+        {
+            "trait_type": "Badge trait",
+            "value": "Live Stream Star"
+        },
+        {
+            "trait_type": "Utility trait",
+            "value": "Autograph 1"
+        },
+        {
+            "trait_type": "Utility trait",
+            "value": "PR1 OLD"
+        },
+        {
+            "trait_type": "Utility trait",
+            "value": "APP1 OLD"
+        },
+        {
+            "trait_type": "Utility trait",
+            "value": "DR1"
+        },
+        {
+            "trait_type": "Utility trait",
+            "value": "Meet the King"
+        },
+        {
+            "trait_type": "Utility trait",
+            "value": "Meet me"
+        }
+    ],
+    "overlays": [
+        {
+            "traitId": "2",
+            "layers": [
+                "https://ether-cards.mypinata.cloud/ipfs/QmNW4UyDE8vXn2ogSwjB2p5Adv3LSFSmemd1fPFki6HMrQ"
+            ]
+        }
+    ],
+    "traits": [
+        {
+            "traitId": "1",
+            "name": "Live Stream Star",
+            "description": "Yohoo",
+            "status": "1",
+            "type": "0",
+            "ipfs_hash": "QmZizSjzPVBxMnGcvQ7SHNVinjVLx2BdYtoYpFnZa9ZDRw",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmZizSjzPVBxMnGcvQ7SHNVinjVLx2BdYtoYpFnZa9ZDRw/icon.png",
+            "claim_url": null
+        },
+        {
+            "traitId": "2",
+            "name": "Autograph 1",
+            "description": "Lorem ipsum",
+            "status": "3",
+            "type": "5",
+            "ipfs_hash": "QmXvffuA2LNhCXTrT1aL9reE3ALgjwgqmwoYeVJKi4vqQ4",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmXvffuA2LNhCXTrT1aL9reE3ALgjwgqmwoYeVJKi4vqQ4/icon.svg",
+            "claim_url": null
+        },
+        {
+            "traitId": "3",
+            "name": "PR1 OLD",
+            "description": "Lorem ipsum dolor sit amet",
+            "status": "1",
+            "type": "3",
+            "ipfs_hash": "QmdGSFgYzsKGeGitWUHu2rtgssEgxWcjsaqbn38cL4qNBG",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmdGSFgYzsKGeGitWUHu2rtgssEgxWcjsaqbn38cL4qNBG/icon.svg",
+            "claim_url": "https://app.galaxis.xyz/44/1/redeemown/?trait_id=3&token_id=1"
+        },
+        {
+            "traitId": "4",
+            "name": "APP1 OLD",
+            "description": "Lorem ipsum dolor",
+            "status": "1",
+            "type": "4",
+            "ipfs_hash": "QmTf56PJSf4fKH9YhkHwEHFVGy4zNibWzTRJnhwqUmCNWX",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmTf56PJSf4fKH9YhkHwEHFVGy4zNibWzTRJnhwqUmCNWX/icon.svg",
+            "claim_url": "https://app.galaxis.xyz/44/1/appointment/?trait_id=4&token_id=1"
+        },
+        {
+            "traitId": "5",
+            "name": "DR1",
+            "description": "Lorem ipsum",
+            "status": "1",
+            "type": "6",
+            "ipfs_hash": "QmXmQsrm3E37zLMmwP6JPcngF2DzUBCwARCxL2By6t39SH",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmXmQsrm3E37zLMmwP6JPcngF2DzUBCwARCxL2By6t39SH/icon.svg",
+            "claim_url": "https://app.galaxis.xyz/44/1/digitalredeem/?trait_id=5&token_id=1"
+        },
+        {
+            "traitId": "10",
+            "name": "Meet the King",
+            "description": "Meet on Cal.com",
+            "status": "2",
+            "type": "7",
+            "ipfs_hash": "QmeGnPt7dYKidxYoUbPQjWTfyXwgHXwoDobFy76bumPzBS",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmeGnPt7dYKidxYoUbPQjWTfyXwgHXwoDobFy76bumPzBS/icon.svg",
+            "claim_url": null
+        },
+        {
+            "traitId": "11",
+            "name": "Meet me",
+            "description": "Meet me via Cal.com",
+            "status": "1",
+            "type": "7",
+            "ipfs_hash": "QmaZVKesYFhsM1hYAN8JxJBgJ6HH6aRTdRiz3hizbxtCfJ",
+            "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmaZVKesYFhsM1hYAN8JxJBgJ6HH6aRTdRiz3hizbxtCfJ/icon.svg",
+            "claim_url": "https://app.galaxis.xyz/44/1/calcomappointment/?trait_id=11&token_id=1"
+        }
+    ]
+}
+	
+
+
+{
+  "tokenId": 1,
+  "name": "Polygon 44 Tasi #1",
+  "collection_type": "galaxis",
+  "collection_name": "Polygon 44 Tasi",
+  "image": "https://ether-cards.mypinata.cloud/ipfs/QmZppnpRc9zoPKWCvm9RV4b33jvMegxq2cMtar7Vrz1hAS/images/1/2/2.jpg",
+  "animation_url": "https://explorer.galaxis.xyz/#/render?app.galaxis.xyz/44/1/metadata/2/2",
+  "sides": [
+    {
+      "id": 1,
+      "dna": "0105",
+      "image": "https://ether-cards.mypinata.cloud/ipfs/QmZppnpRc9zoPKWCvm9RV4b33jvMegxq2cMtar7Vrz1hAS/images/1/2/2.jpg"
+    },
+    {
+      "id": 2,
+      "dna": "01",
+      "image": "https://ether-cards.mypinata.cloud/ipfs/QmZppnpRc9zoPKWCvm9RV4b33jvMegxq2cMtar7Vrz1hAS/images/2/2/2.jpg"
+    }
+  ],
+  "attributes": [
+    {
+      "value": "background 3",
+      "trait_type": "Background"
+    },
+    {
+      "value": "icon 12",
+      "trait_type": "icn"
+    },
+    {
+      "value": "back_layer",
+      "trait_type": "back side"
+    },
+    {
+      "trait_type": "Badge trait",
+      "value": "Live Stream Star"
+    },
+    {
+      "trait_type": "Utility trait",
+      "value": "Autograph 1"
+    },
+    {
+      "trait_type": "Utility trait",
+      "value": "PR1 OLD"
+    },
+    {
+      "trait_type": "Utility trait",
+      "value": "APP1 OLD"
+    },
+    {
+      "trait_type": "Utility trait",
+      "value": "DR1"
+    },
+    {
+      "trait_type": "Utility trait",
+      "value": "Meet the King"
+    },
+    {
+      "trait_type": "Utility trait",
+      "value": "Meet me"
+    }
+  ],
+  "overlays": [
+    {
+      "traitId": "2",
+      "layers": [
+        "https://ether-cards.mypinata.cloud/ipfs/QmNW4UyDE8vXn2ogSwjB2p5Adv3LSFSmemd1fPFki6HMrQ"
+      ]
+    }
+  ],
+  "traits": [
+    {
+      "traitId": "1",
+      "name": "Live Stream Star",
+      "description": "Yohoo",
+      "status": "1",
+      "type": "0",
+      "ipfs_hash": "QmZizSjzPVBxMnGcvQ7SHNVinjVLx2BdYtoYpFnZa9ZDRw",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmZizSjzPVBxMnGcvQ7SHNVinjVLx2BdYtoYpFnZa9ZDRw/icon.png",
+      "claim_url": null
+    },
+    {
+      "traitId": "2",
+      "name": "Autograph 1",
+      "description": "Lorem ipsum",
+      "status": "3",
+      "type": "5",
+      "ipfs_hash": "QmXvffuA2LNhCXTrT1aL9reE3ALgjwgqmwoYeVJKi4vqQ4",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmXvffuA2LNhCXTrT1aL9reE3ALgjwgqmwoYeVJKi4vqQ4/icon.svg",
+      "claim_url": null
+    },
+    {
+      "traitId": "3",
+      "name": "PR1 OLD",
+      "description": "Lorem ipsum dolor sit amet",
+      "status": "1",
+      "type": "3",
+      "ipfs_hash": "QmdGSFgYzsKGeGitWUHu2rtgssEgxWcjsaqbn38cL4qNBG",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmdGSFgYzsKGeGitWUHu2rtgssEgxWcjsaqbn38cL4qNBG/icon.svg",
+      "claim_url": "https://app.galaxis.xyz/44/1/redeemown/?trait_id=3&token_id=1"
+    },
+    {
+      "traitId": "4",
+      "name": "APP1 OLD",
+      "description": "Lorem ipsum dolor",
+      "status": "1",
+      "type": "4",
+      "ipfs_hash": "QmTf56PJSf4fKH9YhkHwEHFVGy4zNibWzTRJnhwqUmCNWX",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmTf56PJSf4fKH9YhkHwEHFVGy4zNibWzTRJnhwqUmCNWX/icon.svg",
+      "claim_url": "https://app.galaxis.xyz/44/1/appointment/?trait_id=4&token_id=1"
+    },
+    {
+      "traitId": "5",
+      "name": "DR1",
+      "description": "Lorem ipsum",
+      "status": "1",
+      "type": "6",
+      "ipfs_hash": "QmXmQsrm3E37zLMmwP6JPcngF2DzUBCwARCxL2By6t39SH",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmXmQsrm3E37zLMmwP6JPcngF2DzUBCwARCxL2By6t39SH/icon.svg",
+      "claim_url": "https://app.galaxis.xyz/44/1/digitalredeem/?trait_id=5&token_id=1"
+    },
+    {
+      "traitId": "10",
+      "name": "Meet the King",
+      "description": "Meet on Cal.com",
+      "status": "2",
+      "type": "7",
+      "ipfs_hash": "QmeGnPt7dYKidxYoUbPQjWTfyXwgHXwoDobFy76bumPzBS",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmeGnPt7dYKidxYoUbPQjWTfyXwgHXwoDobFy76bumPzBS/icon.svg",
+      "claim_url": null
+    },
+    {
+      "traitId": "11",
+      "name": "Meet me",
+      "description": "Meet me via Cal.com",
+      "status": "1",
+      "type": "7",
+      "ipfs_hash": "QmaZVKesYFhsM1hYAN8JxJBgJ6HH6aRTdRiz3hizbxtCfJ",
+      "icon_url": "https://ether-cards.mypinata.cloud/ipfs/QmaZVKesYFhsM1hYAN8JxJBgJ6HH6aRTdRiz3hizbxtCfJ/icon.svg",
+      "claim_url": "https://app.galaxis.xyz/44/1/calcomappointment/?trait_id=11&token_id=1"
+    }
+  ]
+}
+	
+	*/
 
 	const metadata = {
 		tokenId: 1,
@@ -64,6 +356,78 @@ const CardTest = ()=>{
 				value: "Color Scheme"
 			}
 		],
+    traits: [
+      {
+        traitId: "1",
+        name: "Live Stream Star",
+        description: "Yohoo",
+        status: "1",
+        type: "0",
+        ipfs_hash: "QmZizSjzPVBxMnGcvQ7SHNVinjVLx2BdYtoYpFnZa9ZDRw",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmZizSjzPVBxMnGcvQ7SHNVinjVLx2BdYtoYpFnZa9ZDRw/icon.png",
+        claim_url: null
+      },
+      {
+        traitId: "2",
+        name: "Autograph 1",
+        description: "Lorem ipsum",
+        status: "3",
+        type: "5",
+        ipfs_hash: "QmXvffuA2LNhCXTrT1aL9reE3ALgjwgqmwoYeVJKi4vqQ4",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmXvffuA2LNhCXTrT1aL9reE3ALgjwgqmwoYeVJKi4vqQ4/icon.svg",
+        claim_url: null
+      },
+      {
+        traitId: "3",
+        name: "PR1 OLD",
+        description: "Lorem ipsum dolor sit amet",
+        status: "1",
+        type: "3",
+        ipfs_hash: "QmdGSFgYzsKGeGitWUHu2rtgssEgxWcjsaqbn38cL4qNBG",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmdGSFgYzsKGeGitWUHu2rtgssEgxWcjsaqbn38cL4qNBG/icon.svg",
+        claim_url: "https://app.galaxis.xyz/44/1/redeemown/?trait_id=3&token_id=1"
+      },
+      {
+        traitId: "4",
+        name: "APP1 OLD",
+        description: "Lorem ipsum dolor",
+        status: "1",
+        type: "4",
+        ipfs_hash: "QmTf56PJSf4fKH9YhkHwEHFVGy4zNibWzTRJnhwqUmCNWX",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmTf56PJSf4fKH9YhkHwEHFVGy4zNibWzTRJnhwqUmCNWX/icon.svg",
+        claim_url: "https://app.galaxis.xyz/44/1/appointment/?trait_id=4&token_id=1"
+      },
+      {
+        traitId: "5",
+        name: "DR1",
+        description: "Lorem ipsum",
+        status: "1",
+        type: "6",
+        ipfs_hash: "QmXmQsrm3E37zLMmwP6JPcngF2DzUBCwARCxL2By6t39SH",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmXmQsrm3E37zLMmwP6JPcngF2DzUBCwARCxL2By6t39SH/icon.svg",
+        claim_url: "https://app.galaxis.xyz/44/1/digitalredeem/?trait_id=5&token_id=1"
+      },
+      {
+        traitId: "10",
+        name: "Meet the King",
+        description: "Meet on Cal.com",
+        status: "2",
+        type: "7",
+        ipfs_hash: "QmeGnPt7dYKidxYoUbPQjWTfyXwgHXwoDobFy76bumPzBS",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmeGnPt7dYKidxYoUbPQjWTfyXwgHXwoDobFy76bumPzBS/icon.svg",
+        claim_url: null
+      },
+      {
+        traitId: "11",
+        name: "Meet me",
+        description: "Meet me via Cal.com",
+        status: "1",
+        type: "7",
+        ipfs_hash: "QmaZVKesYFhsM1hYAN8JxJBgJ6HH6aRTdRiz3hizbxtCfJ",
+        icon_url: "https://ether-cards.mypinata.cloud/ipfs/QmaZVKesYFhsM1hYAN8JxJBgJ6HH6aRTdRiz3hizbxtCfJ/icon.svg",
+        claim_url: "https://app.galaxis.xyz/44/1/calcomappointment/?trait_id=11&token_id=1"
+      }
+    ],
 		about: "400 LEGENDARY MASTERPIECES, HANDCRAFTED WITH LOVE\n\nGalaxis Generation Zero Cards represent the future of dynamic digital collectibles.\n\nEvery elite membership card unlocks access to the most powerful smart contract technology and web3 utilities in existence.\n\nPlus, they just look so damn amazing in your wallet!",
 		description: "Shi Mochi (pronounced She Moh-Chee) sometimes extended to Shi Mochi Mochi as a playful term of endearment by her fellow crew members.  To her foes, she is not nearly as sweet as her name may indicate.  To her friends and allies, she is a welcome and delicious treat.  She is a deadly assassin by trade.\n\nAlthough nobody knows her true origin - as a child, she apprenticed in the culinary arts.  Shi was also once a well-known Wagashi chef.  After poisoning a ruthless crime lord, his gang exacted revenge by removing her hands, feet and tongue.  In fact, without her retro futuristic cybernetic implants, she is severely disabled.",
 		brand_logo: "https://ether-cards.mypinata.cloud/ipfs/QmSVJcwKFqdo4hUDjMSN2biKcbG3zBEgUshsNBcpd9aUqh/gzl.png",
@@ -94,10 +458,10 @@ const CardTest = ()=>{
 
 	return (
 		<>
-		<div style={{width:"100%", height:"100%", padding:'50px', overflow:"hidden"}}>	
+		<div style={{width:"100%", height:"100%", padding:'50px', overflow:"hidden", background:'red'}}>	
 		{loaded && (
 		
-			<GalaxisCard
+			<GalaxisCardV2
 				name="Teszt"
 				metadata={metadata}
 				traitTypes={traitTypes}

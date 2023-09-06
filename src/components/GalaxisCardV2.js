@@ -307,7 +307,21 @@ const GalaxisCardV2 = ({
                             </div>
                         ))}
                         </>}
-                        {metadata.traits&&<>
+
+                        {(metadata.traits && metadata.traits.length>0)&&<>
+                          <div
+                              className='trait-holder-v2 numeric'
+                              style={{clipPath: "url(#svgPath)" }}
+                              onClick={(e) => {}}
+                            >
+                             {metadata.traits.length}
+                            </div>
+
+                        </>}
+
+
+
+                 {/*        {metadata.traits&&<>
                         {metadata.traits.map((elem, metadataIndex) => (
                           elem.icon_url ?
                             <>
@@ -358,6 +372,8 @@ const GalaxisCardV2 = ({
                             })
                         ))}
                         </>}  
+ */}
+
                       </>
                       <svg height="0" width="0">
                         <defs>
