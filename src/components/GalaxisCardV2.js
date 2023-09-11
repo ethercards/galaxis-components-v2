@@ -6,6 +6,7 @@ import CardBack from './CardBack.jsx';
 import TraitCard from './TraitCard.jsx';
 import './GalaxisCard.css';
 import useContainerDimensions from './useContainerDimensions';
+import TraitListCard from './TraitListCard.jsx';
 
 
 const GalaxisCardV2 = ({
@@ -26,7 +27,7 @@ const GalaxisCardV2 = ({
   const [fullscreenSrc, setFullscreenSrc] = useState(null);
   const [mobileView, setmobileView] = useState(false);
   const [loading, setLoading] = useState(true);
-  const imageRef = useRef();
+  const imageRef = useRef(null);
   const [defaultScopeWidth, setDefaultScopeWidth] = useState(
     imageContainerWidth ? imageContainerWidth - horizontalPadding : 400
   );
@@ -43,8 +44,29 @@ const GalaxisCardV2 = ({
     height: 0,
   });
   const [containerSize, setContainerSize] = useState('c-medium');
-  const [highlightedSides, setHighlightedSides] = useState([]);
+  const [traitListVisible, setTraitListVisible] = useState(false);
 
+ 
+  const [highlightedSides, setHighlightedSides] = useState([]);
+  const [showFront,setShowFront] = useState(true);
+  const [showBack, setShowBack] = useState(false);
+  const [bgColorArray, _setBgColorArray] = useState(null);
+  const bgcRef = useRef(bgColorArray);
+  const setBgColorArray = (val) => {
+    bgcRef.current = val;
+    _setBgColorArray(val)
+  }
+
+  
+  const visible = {
+    FRONT:0,
+    BACK: 1,
+    TRAITLIST:2,
+    TRAITS: 3
+  }
+  const [activeBackSide, setActiveBackSide] = useState(visible.BACK);
+
+  
   useEffect(() => {
     if (window.innerWidth < 900) {
       setmobileView(true);
@@ -63,8 +85,7 @@ const GalaxisCardV2 = ({
     let highlighted = [];
     if(metadata.sides && metadata.sides.length>0){
 
-      
-      console.log('check for highlighed sides',metadata.sides);
+      console.log('check for highlighted sides',metadata.sides);
       //display_mode "highlight"
 
       metadata.sides.forEach((item)=>{
@@ -76,25 +97,49 @@ const GalaxisCardV2 = ({
       console.log('+++++',highlighted);
       setHighlightedSides(highlighted);
 
+
+
     }
 
 
   },[metadata])
 
 
-  const showTraits = (e) => {
+/*   const showTraits = (e) => {
     e.stopPropagation();
     setTraitsVisible(true);
     document.getElementById('scope').style.transform =
       'perspective(1000px) rotateY(180deg)';
   };
+
   const hideTraits = (e) => {
     e.stopPropagation();
     setTraitsVisible(false);
     setshowBackCard(false);
     document.getElementById('scope').style.transform =
       'perspective(1000px) rotateY(0deg)';
+  }; */
+
+  const flipToBack = (e) => {
+    e.stopPropagation();
+    setShowBack(true);
+    setShowFront(false);
+
+    //TODO: set visible back content
+
+    document.getElementById('scope').style.transform =
+      'perspective(1000px) rotateY(180deg)';
   };
+
+  const flipToFront = (e) => {
+    e.stopPropagation();
+    setShowBack(false);
+    setShowFront(true);
+    document.getElementById('scope').style.transform =
+      'perspective(1000px) rotateY(0deg)';
+  };
+
+
 
   const stopPropagation = (e) => {
     e.stopPropagation();
@@ -196,10 +241,10 @@ const GalaxisCardV2 = ({
               }}
             >
               <div
-                className={`scope ${traitsVisible ? 'active' : ''}  `}
+                className="scope"
                 style={{ width: '100%', height: '100%' }}
                 id='scope'
-                onTransitionEnd={() => console.log('hello')}
+                onTransitionEnd={() => {console.log('hello')}}
                 onMouseOver={() => {
                   setshowFlipIcon(true);
                 }}
@@ -207,8 +252,10 @@ const GalaxisCardV2 = ({
                   setshowFlipIcon(false);
                 }}
               >
+
+                {/* FRONT SIDE */}
                 <span
-                  className={`front ${!traitsVisible ? 'active' : ''} `}
+                  className={`front ${showFront ? 'active' : ''} `}
                   id='front-span'
                 >
                   {(metadata.sides && metadata.sides.length >= 1 && (!metadata.sides[0].type || metadata.sides[0].type !== 'video'))
@@ -223,11 +270,20 @@ const GalaxisCardV2 = ({
                       }
                       alt='not found'
                       ref={imageRef}
-                      onLoad={() => {
+                      onLoad={(e) => {
                         setTheImageRatio(
                           imageRef.current.naturalWidth,
                           imageRef.current.naturalHeight
                         );
+                        imageRef.current.crossOrigin = "Anonymous";
+                        const context = document.createElement('canvas').getContext('2d');
+                        context.drawImage(imageRef.current, 0, 0);
+                        const {
+                          data
+                        } = context.getImageData(10, 10, 1, 1);
+                        if(data){
+                          setBgColorArray([data[0],data[1],data[2]]);
+                        }
                         setLoading(false);
                       }}
                     />
@@ -276,8 +332,8 @@ const GalaxisCardV2 = ({
                             showFlipIcon || mobileView ? 'block' : 'none',
                         }}
                         onClick={(e) => {
-                          showTraits(e);
-                          setshowBackCard(true);
+                          flipToBack(e);
+                          //setshowBackCard(true);
                         }}
                       />
                     )}
@@ -288,15 +344,16 @@ const GalaxisCardV2 = ({
                         }`}
                     >
                       <>
-                        {<>
+  
                         {highlightedSides&&highlightedSides.map((hlItem,idx)=>(
                           <div
                               className='trait-holder-v2'
                               style={{clipPath: "url(#svgPath)" }}
                               key={idx}
                               onClick={(e) => {
-                                showTraits(e);
-                                setshowBackCard(true);
+                                setActiveBackSide(visible.BACK);
+                                flipToBack(e);
+                                //setshowBackCard(true);
                               }}
                             >
                               {' '}
@@ -306,7 +363,24 @@ const GalaxisCardV2 = ({
                                 />{' '}
                             </div>
                         ))}
-                        </>}
+                        
+                        {(metadata.traits && metadata.traits.length>0)&&
+                        <>
+                          <div
+                              className='trait-holder-v2 numeric'
+                              style={{clipPath: "url(#svgPath)" }}
+                              onClick={(e) => {
+                                //setTraitListVisible(true);
+                                setActiveBackSide(visible.TRAITLIST);
+                                flipToBack(e);
+                              }}
+                            >
+                             {metadata.traits.length}
+                            </div>
+                        </>
+                        }
+
+                        {/* 
                         {metadata.traits&&<>
                         {metadata.traits.map((elem, metadataIndex) => (
                           elem.icon_url ?
@@ -358,6 +432,7 @@ const GalaxisCardV2 = ({
                             })
                         ))}
                         </>}  
+                      */} 
                       </>
                       <svg height="0" width="0">
                         <defs>
@@ -369,38 +444,51 @@ const GalaxisCardV2 = ({
                     </div>
                   )}
                 </span>
-                {metadata.traits && metadata.traits.length > 0 && traitTypes && (
-                  <span
-                    className={`back ${traitsVisible ? 'active' : ''} `}
-                    id='trait-span'
-                  >
-                    <TraitCard
-                      trait={selectedTrait}
-                      onClick={hideTraits}
-                      image={
-                        metadata.sides && metadata.sides.length > 1
-                          ? metadata.sides[0].image
-                          : metadata.image
-                      }
-                      traitImg={selectedTrait.icon_url ? selectedTrait.icon_url : GALAXIS_BASE_URL + traitType.icon_white}
-                    // claimUrl={selectedTrait.claim_url}
-                    />
-                  </span>
-                )}
-                {metadata.sides && metadata.sides.length > 1 && (
-                  <span
-                    className={`back_card ${showBackCard ? 'active' : ''} `}
-                    id='back-span'
-                  >
-                    <CardBack
-                      onClick={hideTraits}
-                      backImage={metadata.sides[1].image}
-                      type={metadata.sides[1].type === 'video' && metadata.sides[1].type}
-                      highLighted={highlightedSides.length>0}
 
-                    />
+
+                {/* BACK SIDE */}
+                
+                
+                  
+                  
+                  
+                  <span className={`back ${showBack ? 'active' : ''} `}>
+                    
+                    {(metadata.traits && metadata.traits.length > 0 && traitTypes && activeBackSide === visible.TRAITLIST) && (
+                      <TraitListCard
+                        traits={metadata.traits}
+                        onClick={(e)=>{
+                          flipToFront(e);
+                        }}
+                        bgColor={bgcRef.current}
+                      />
+                    )}
+
+                    {(metadata.traits && metadata.traits.length > 0 && traitTypes && activeBackSide === visible.TRAITS ) && (
+                      <TraitCard
+                        trait={selectedTrait}
+                        onClick={flipToFront}
+                        image={
+                          metadata.sides && metadata.sides.length > 1
+                            ? metadata.sides[0].image
+                            : metadata.image
+                        }
+                        traitImg={selectedTrait.icon_url ? selectedTrait.icon_url : GALAXIS_BASE_URL + traitType.icon_white}
+                      // claimUrl={selectedTrait.claim_url}
+                      />
+                    )}
+
+                    {(metadata.sides && metadata.sides.length > 1  && activeBackSide === visible.BACK) && (
+                      <CardBack
+                        onClick={flipToFront}
+                        backImage={metadata.sides[1].image}
+                        type={metadata.sides[1].type === 'video' && metadata.sides[1].type}
+                        highLighted={highlightedSides.length>0}
+
+                      />
+                    )}
                   </span>
-                )}
+  
               </div>
             </div>
           </div>
