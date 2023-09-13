@@ -83,6 +83,7 @@ const GalaxisCardV2 = ({
   useEffect(()=>{
     //check for highlighted sides
     let highlighted = [];
+    console.log('METADATA IN SIDES', metadata);
     if(metadata.sides && metadata.sides.length>0){
 
       console.log('check for highlighted sides',metadata.sides);
@@ -275,15 +276,21 @@ const GalaxisCardV2 = ({
                           imageRef.current.naturalWidth,
                           imageRef.current.naturalHeight
                         );
-                        imageRef.current.crossOrigin = "Anonymous";
-                        const context = document.createElement('canvas').getContext('2d');
-                        context.drawImage(imageRef.current, 0, 0);
-                        const {
-                          data
-                        } = context.getImageData(10, 10, 1, 1);
-                        if(data){
-                          setBgColorArray([data[0],data[1],data[2]]);
-                        }
+                        try{
+
+                          imageRef.current.crossOrigin = "anonymous";
+                          const context = document.createElement('canvas').getContext('2d');
+                          context.drawImage(imageRef.current, 0, 0);
+                          const {
+                            data
+                          } = context.getImageData(10, 10, 1, 1);
+                          if(data){
+                            setBgColorArray([data[0],data[1],data[2]]);
+                          }
+                        }catch(e){
+                          console.log(e);
+                        };
+
                         setLoading(false);
                       }}
                     />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import close_icon from '../assets/images/close_png.png';
 import gzero from '../assets/images/genzero.png';
+import GalaxisScrollBar from './GalaxisScrollBar.jsx';
 
 const TraitListCard = ({ traits, onClick, bgColor }) => {
 
@@ -33,7 +34,7 @@ const TraitListCard = ({ traits, onClick, bgColor }) => {
 
     const showTraitDetails = ()=>{
         document.getElementById('trait-base').style.transform =
-      'perspective(600px) rotateY(-135deg)';
+      'perspective(600px) rotateY(-180deg)';
         
     }
 
@@ -82,9 +83,15 @@ const TraitListCard = ({ traits, onClick, bgColor }) => {
                         </div>
                         <div className="trait-details">
                             <h3 className='title'>{traits[selectedTraitIdx].name}</h3>
+
                             <div className='scroll-wrapper'>
-                                <p className='description'>{traits[selectedTraitIdx].description}</p>
+                                <GalaxisScrollBar>
+                                    <p className='description'>{traits[selectedTraitIdx].description}</p>
+                                </GalaxisScrollBar>
                             </div>
+                            {/* <div className='scroll-wrapper'>
+                                <p className='description'>{traits[selectedTraitIdx].description}</p>
+                            </div> */}
                         </div>
                    </div>
                    <div className='logo'>

@@ -1,0 +1,66 @@
+.glx-scrollbar{
+	position: relative;
+	width: 100%;
+	height:100%;
+	padding-right: 18px;
+	overflow:hidden;
+}
+
+
+.glx-scrollbar-scroll{
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	overflow: auto;
+    height: 100%;
+	width:100%;
+  }
+  
+.glx-scrollbar-scroll::-webkit-scrollbar {
+	display: none;
+}
+
+.glx-scrollbar-scroll{
+	overflow: auto;
+}
+
+.glx-track{
+	width:8px;
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	border-right:solid 2px black;
+	transition: opacity 0.5s ease-out;
+}
+
+.glx-thumb{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.glx-thumb .glx-thumb-top{
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAMgCAMAAAAdvxJjAAAAS1BMVEVHcEzz8/Py8vLx8fF0dHQsLCzy8vL///+8vLwtLS3x8fF1dXWjo6Px8fHy8vJ1dXXx8fG7u7uEhIS+vr4AAAACAgIBAQEEBAQFBQXdjDhUAAAAFHRSTlMAKyp19/0pA8f9dPj4c3b3csj4xpTkHZ8AAAClSURBVGje7djJDsIwDEXRFErTMg+vSZn+/zcRQqiuN2FZoZudz7NkKd45BPvicTupm0snG+8Ogww0bSeNENf1IAOLT/yFuKyzDFTtShoh7jdZBqqTid9wzprCUw4EAAAgpZA8uI6+CIk/BQAAAAAAAAAAAAAAmM21x0H/R8AZCgCAnyEV4eEhe7h5uHu4FqewFwAAAAAAAAAAAAAAAAAAAAAA5ggv4jHiEeAIA48AAAAASUVORK5CYII=');
+	background-position: top left;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width:100%;
+	height: 100%;
+}
+
+.glx-thumb .glx-thumb-bottom{
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAyCAYAAABVl1tcAAABn0lEQVR4AWJobGz8ycXF9Z+BgYE8/P37d6UrV64sSktL+8PKykq6Ae4FPmD85csX/ePHj28OCwv7y8TERKoBCPzp0yfbvXv3HnJzc/tDSDPIIqhGTPz161ffjRs3njc3N8dpENDL/0CKceL///8zffv2LWbRokV3tLW1/6IbwMbGBjeAkEGsQBdlA9qtA88MgTAM4Jcys8/cbFUTuZD614bBMGwxhFWDKKR/bzQ32a0WzFi3wzYv4Lu3DxAe4PWTjsfTNM0LYwx+gdwLANBOCHGf5/m74ziSUrpoAQA67/v+Sb3YFwoA0CUe+M0GHAKQUl6sAtI0/eSc5wqyUQClVNq2LVUzzRiIgBZCQcQ0zT8ABUEABRHQfyiIGIYBj7UhAg5QEAD0o5pbrgJc18UBIAcDNmADNiCO43UA5/wxy7IPz/NQwP9kGYYhK4pi9H1fHwCT5UwI8VCW5VsQBPoAgE7HcbyrqmoIw3DRBgC0m6bptq5rHkXRog0A6GSe55u2bfskSRZtAEDHarFed133zBj7tixLDwDQkYKu1M9+/QFtJbMQ6eN8kAAAAABJRU5ErkJggg==');
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 100%;
+	height:70px;
+	margin-top: -1px;
+}
